@@ -1,0 +1,149 @@
+Instructions:
+
+Use Playwright v1.56+ syntax and best practices for TypeScript.
+Preserve all original test steps exactly—do not add, remove, or modify any logical steps from the source.
+Use the same locators as defined in the Selenium Java code (e.g., if the Java code uses By.id("foo"), use '#foo' in Playwright).
+Do not hardcode sleep or waitForTimeout—use Playwright’s built-in auto-waiting mechanisms (e.g., await page.locator(...).click(), await page.waitForURL(), etc.).
+If a Selenium Java feature has no direct equivalent in Playwright TypeScript, insert a comment: // not implemented.
+Include clear comments in the TypeScript code to explain each step, mirroring the intent of the original Java code.
+The output must be valid Playwright TypeScript—not generic TypeScript or pseudocode.
+Keep the timeout as 60 seconds
+Make Playwright not to click cancel button in alert automatically (by default it clicks cancel button)
+
+Context
+
+You are an AI assistant specialized in test automation migration.
+Your task is to accurately translate legacy Selenium Java test scripts into modern, idiomatic Playwright TypeScript scripts while maintaining functional parity and leveraging Playwright’s native capabilities.
+
+Example:
+
+Java Selenium Code
+package demo;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import java.time.Duration;
+
+/**
+ * Minimal Selenium Java Test
+ * Equivalent of Playwright "get started link" test
+ */
+public class GetStartedTest {
+
+    public static void main(String[] args) {
+
+        // Setup ChromeDriver
+        WebDriverManager.chromedriver().setup();
+        WebDriver driver = new ChromeDriver();
+
+        // Define Explicit Wait
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+
+        try {
+            // Step 1) Open Playwright website
+            driver.get("https://playwright.dev/");
+            driver.manage().window().maximize();
+
+            // Step 2) Click the "Get started" link
+            WebElement getStartedLink = wait.until(
+                ExpectedConditions.elementToBeClickable(By.xpath("//a[normalize-space()='Get started']"))
+            );
+            getStartedLink
+
+Converted Playwright typescript code
+
+import { test, expect } from '@playwright/test';
+
+test('get started link', async ({ page }) => {
+  await page.goto('https://playwright.dev/');
+
+  // Click the get started link.
+  await page.getByRole('link', { name: 'Get started' }).click();
+
+  // Expects page to have a heading with the name of Installation.
+  await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
+});
+
+Convert the below Java Selenium Code
+
+package week2.day1;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
+import java.time.Duration;
+
+/**
+ * TestNG Selenium Test for Amazon.ca Search Functionality
+ * Automates search on Amazon homepage with explicit waits
+ */
+public class AmazonSearchTest {
+
+    private WebDriver driver;
+    private WebDriverWait wait;
+
+    /**
+     * Setup ChromeDriver and initialize WebDriver and WebDriverWait
+     */
+    @BeforeClass
+    public void setupBrowser() {
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver();
+        wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        driver.manage().window().maximize();
+        driver.get("https://www.amazon.ca/");
+    }
+
+    /**
+     * Search a product in Amazon.ca using explicit waits
+     */
+    @Test
+    public void searchProduct() {
+        // Step 1) Select "All Departments" from search dropdown using ID
+        WebElement searchDropdown = wait.until(
+                ExpectedConditions.elementToBeClickable(By.id("searchDropdownBox"))
+        );
+        searchDropdown.click();
+        searchDropdown.findElement(By.xpath("//option[@value='search-alias=aps']")).click();
+
+        // Step 2) Enter search text in the search textbox using ID
+        WebElement searchBox = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(By.id("twotabsearchtextbox"))
+        );
+        searchBox.sendKeys("laptop");
+
+        // Step 3) Click the search button using ID
+        WebElement searchButton = wait.until(
+                ExpectedConditions.elementToBeClickable(By.id("nav-search-submit-button"))
+        );
+        searchButton.click();
+
+        // Step 4) Verify page title contains search keyword
+        wait.until(ExpectedConditions.titleContains("laptop"));
+        System.out.println("Page title after search: " + driver.getTitle());
+    }
+
+    /**
+     * Close the browser after test execution
+     */
+    @AfterClass
+    public void tearDown() {
+        if (driver != null) {
+            driver.quit();
+        }
+    }
+}
