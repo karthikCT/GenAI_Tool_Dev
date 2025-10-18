@@ -1,0 +1,7 @@
+curl --location 'https://api.groq.com/openai/v1/audio/translations' \
+--header 'Content-Type: multipart/form-data' \
+--form 'model="whisper-large-v3"' \
+--form 'file=@"/C:/Users/User/Downloads/speech_orig.wav"'
+
+
+{"text":" The birch canoe slid on the smooth planks. Glued the sheet to the dark blue background. It's easy to tell the depth of a well. Four hours of steady work faced us.","x_groq":{"id":"req_01k7tsx7nmf0es7w398wbmwzy1"}}

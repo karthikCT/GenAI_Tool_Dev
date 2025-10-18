@@ -1,0 +1,64 @@
+curl --location 'https://api.groq.com/openai/v1/chat/completions' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer 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' \
+--header 'Cookie: __cf_bm=O8UE5_8HCyamcNwkrEgy1AyeU1o8bRieVlkM7cmD1YI-1760766020-1.0.1.1-NLjdsjvmRXUzDgq0GRjE_HoZPtbY92lMvB9kAXlLugvOqNXTGt9UDrwj1zx0ObB5JH7FvcBd1.IWBQe.XSGlAzUsCmrCOej17xR_iMXXCK0' \
+--data '{
+  "messages": [
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "text",
+          "text": "What'\''s in this image?"
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "https://shifu.hotstarext.com/SOURCE/VOD/cd-2025-08-29/PKLEveryday_Web-025dd6fe-6750-407c-a170-826fd089bed0.jpg"
+          }
+        }
+      ]
+    }
+  ],
+  "model": "meta-llama/llama-4-maverick-17b-128e-instruct",
+  "temperature": 1,
+  "max_completion_tokens": 1024,
+  "top_p": 1,
+  "stream": false,
+  "stop": null
+}'
+
+
+
+{
+    "id": "chatcmpl-bb23643e-9390-4ef4-98de-c9c01699b8fa",
+    "object": "chat.completion",
+    "created": 1760766215,
+    "model": "meta-llama/llama-4-maverick-17b-128e-instruct",
+    "choices": [
+        {
+            "index": 0,
+            "message": {
+                "role": "assistant",
+                "content": "The image is a promotional advertisement for the Pro Kabaddi League, featuring six male players in sports jerseys. The image is divided into several key elements that convey the message of the advertisement.\n\n*   **Title and Logo**\n    *   The title \"PRO KABADDI LEAGUE\" is prominently displayed at the top center of the image.\n    *   The logo features a stylized letter \"P\" and \"K\" in yellow and green, respectively, with a red background.\n*   **Players**\n    *   Six male players are featured in the image, standing in a line and facing forward.\n    *   Each player wears a different colored jersey, showcasing their unique team identity.\n    *   The players have their arms crossed, conveying confidence and determination.\n*   **Background**\n    *   The background of the image is dark red, with a subtle gradient effect that adds depth and visual interest.\n    *   A faint image of a kabaddi player in action is visible behind the main players, adding context to the advertisement.\n*   **Text**\n    *   The text \"EVERY DAY 7:30PM ONWARDS\" is displayed prominently at the bottom center of the image.\n    *   The text is in white and orange, with a bold font that grabs attention.\n*   **Overall Design**\n    *   The image has a dynamic and energetic design, with bold colors and striking visuals.\n    *   The use of negative space around the players creates a sense of focus and emphasis on the main message.\n\nIn summary, the image is a promotional advertisement for the Pro Kabaddi League, featuring six male players in sports jerseys and highlighting the league's daily broadcast schedule. The image effectively conveys the excitement and energy of the sport, while also emphasizing the importance of tuning in to watch the games."
+            },
+            "logprobs": null,
+            "finish_reason": "stop"
+        }
+    ],
+    "usage": {
+        "queue_time": 3.71765541,
+        "prompt_tokens": 2339,
+        "prompt_time": 0.076282518,
+        "completion_tokens": 377,
+        "completion_time": 0.873803628,
+        "total_tokens": 2716,
+        "total_time": 0.950086146
+    },
+    "usage_breakdown": null,
+    "system_fingerprint": "fp_d2c1f7e199",
+    "x_groq": {
+        "id": "req_01k7txgctaeqk9fp5g8fr12dgn"
+    },
+    "service_tier": "on_demand"
+}

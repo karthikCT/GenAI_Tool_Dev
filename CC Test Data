@@ -1,0 +1,57 @@
+curl --location 'https://api.groq.com/openai/v1/chat/completions' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer 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' \
+--header 'Cookie: __cf_bm=O8UE5_8HCyamcNwkrEgy1AyeU1o8bRieVlkM7cmD1YI-1760766020-1.0.1.1-NLjdsjvmRXUzDgq0GRjE_HoZPtbY92lMvB9kAXlLugvOqNXTGt9UDrwj1zx0ObB5JH7FvcBd1.IWBQe.XSGlAzUsCmrCOej17xR_iMXXCK0' \
+--data '{
+  "model": "llama-3.3-70b-versatile",
+  "messages": [
+    {
+      "role": "user",
+      "content": "As an Manual Tester use the instructions in the prompt ,Instructions (user prompt)\n\n- Generate ONLY test data for credit card applications\n- Use different types of cards and conditions\n- Add Test data for both positive and negative test cases\n- [DO NOT] include explanations."
+    },
+    {
+      "role": "system",
+      "content": "As a Manual Tester Give me Test data for credit card application"
+    },
+    {
+      "role": "assistant",
+      "content": "only test data should be displayed"
+    }
+  ]
+}
+'
+
+
+
+{
+    "id": "chatcmpl-5ed5c441-4a21-4c26-9d07-5aee41a4085c",
+    "object": "chat.completion",
+    "created": 1760766671,
+    "model": "llama-3.3-70b-versatile",
+    "choices": [
+        {
+            "index": 0,
+            "message": {
+                "role": "assistant",
+                "content": " however I need to provide multiple test cases, here are a few\n\n**Positive Test Cases**\n\n1. Card Type: Visa, Card Number: 4111111111111111, Expiration Date: 12/25, CVV: 123, Name: John Doe, Address: 123 Main St, Age: 25, Income: 50000\n2. Card Type: Mastercard, Card Number: 5105105105105100, Expiration Date: 06/28, CVV: 456, Name: Jane Smith, Address: 456 Elm St, Age: 30, Income: 60000\n3. Card Type: Amex, Card Number: 371449635398431, Expiration Date: 08/31, CVV: 789, Name: Bob Johnson, Address: 789 Oak St, Age: 35, Income: 70000\n4. Card Type: Discover, Card Number: 6011111111111117, Expiration Date: 10/22, CVV: 012, Name: Alice Brown, Address: 901 Maple St, Age: 20, Income: 40000\n5. Card Type: Diners Club, Card Number: 30569309025904, Expiration Date: 02/26, CVV: 345, Name: Mike Davis, Address: 234 Pine St, Age: 40, Income: 80000\n\n**Negative Test Cases**\n\n1. Card Type: Visa, Card Number: 4111111111111111, Expiration Date: 12/15, CVV: 123, Name: John Doe, Address: 123 Main St, Age: 25, Income: 50000\n2. Card Type: Mastercard, Card Number: 5105105105105100, Expiration Date: 06/17, CVV: 456, Name: Jane Smith, Address: 456 Elm St, Age: 30, Income: 60000\n3. Card Type: Amex, Card Number: 371449635398431, Expiration Date: 08/13, CVV: 789, Name: Bob Johnson, Address: 789 Oak St, Age: 35, Income: 70000\n4. Card Type: Discover, Card Number: 6011111111111117, Expiration Date: 10/10, CVV: 012, Name: Alice Brown, Address: 901 Maple St, Age: 20, Income: 40000\n5. Card Type: Diners Club, Card Number: 30569309025904, Expiration Date: 02/02, CVV: 345, Name: Mike Davis, Address: 234 Pine St, Age: 40, Income: 80000\n\n**Invalid Test Cases**\n\n1. Card Type: Invalid, Card Number: 1234567890123456, Expiration Date: 12/25, CVV: 123, Name: John Doe, Address: 123 Main St, Age: 25, Income: 50000\n2. Card Type: Visa, Card Number: 411111111111111a, Expiration Date: 12/25, CVV: 123, Name: John Doe, Address: 123 Main St, Age: 25, Income: 50000\n3. Card Type: Mastercard, Card Number: 5105105105105100, Expiration Date: 13/25, CVV: 456, Name: Jane Smith, Address: 456 Elm St, Age: 30, Income: 60000\n4. Card Type: Amex, Card Number: 371449635398431, Expiration Date: 08/31, CVV: abc, Name: Bob Johnson, Address: 789 Oak St, Age: 35, Income: 70000\n5. Card Type: Discover, Card Number: 6011111111111117, Expiration Date: 10/22, CVV: 012, Name: Alice Brown, Address: , Age: 20, Income: 40000\n\n**Boundary Test Cases**\n\n1. Card Type: Visa, Card Number: 4111111111111111, Expiration Date: 01/25, CVV: 123, Name: John Doe, Address: 123 Main St, Age: 18, Income: 20000\n2. Card Type: Mastercard, Card Number: 5105105105105100, Expiration Date: 12/31, CVV: 456, Name: Jane Smith, Address: 456 Elm St, Age: 65, Income: 100000\n3. Card Type: Amex, Card Number: 371449635398431, Expiration Date: 01/01, CVV: 789, Name: Bob Johnson, Address: 789 Oak St, Age: 18, Income: 50000\n4. Card Type: Discover, Card Number: 6011111111111117, Expiration Date: 12/31, CVV: 012, Name: Alice Brown, Address: 901 Maple St, Age: 65, Income: 150000\n5. Card Type: Diners Club, Card Number: 30569309025904, Expiration Date: 01/01, CVV: 345, Name: Mike Davis, Address: 234 Pine St, Age: 18, Income: 30000"
+            },
+            "logprobs": null,
+            "finish_reason": "stop"
+        }
+    ],
+    "usage": {
+        "queue_time": 0.203162524,
+        "prompt_tokens": 110,
+        "prompt_time": 0.005645809,
+        "completion_tokens": 1156,
+        "completion_time": 1.957978519,
+        "total_tokens": 1266,
+        "total_time": 1.9636243279999999
+    },
+    "usage_breakdown": null,
+    "system_fingerprint": "fp_155ab82e98",
+    "x_groq": {
+        "id": "req_01k7txycqrepmr7rctmkg6jrzk"
+    },
+    "service_tier": "on_demand"
+}

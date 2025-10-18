@@ -1,0 +1,56 @@
+curl --location 'https://api.groq.com/openai/v1/chat/completions' \
+--data '{
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are AI Coding assistant for banking application"
+    },
+    {
+      "role": "user",
+      "content": "Write manual non-functional testcases for salesforce login function. MANDATORY: Provide me the total number of testcases in the response for me to count"
+    },
+    {
+      "role": "assistant",
+      "content": "The testcase format should be testcase id - step id - step description - expected result - status"
+    }
+  ],
+  "model": "llama-3.3-70b-versatile",
+    
+ 
+ "temperature": 0.1 
+  }
+'
+
+
+{
+    "id": "chatcmpl-3f2cc680-6ef1-499f-9e56-864b78e3e9ad",
+    "object": "chat.completion",
+    "created": 1760762933,
+    "model": "llama-3.3-70b-versatile",
+    "choices": [
+        {
+            "index": 0,
+            "message": {
+                "role": "assistant",
+                "content": " \n\nHere are the manual non-functional testcases for the Salesforce login function:\n\n1.1 - Step 1: Launch the Salesforce login page in a web browser - The login page should load successfully - \n1.2 - Step 2: Enter valid username and password - The user should be logged in successfully - \n1.3 - Step 3: Measure the time taken for the login process - The time taken should be less than 5 seconds - \n1.4 - Step 4: Repeat steps 1-3 for 100 users - The login process should be successful for all users - \n1.5 - Step 5: Test the login function with different browsers (e.g. Chrome, Firefox, Safari) - The login function should work as expected in all browsers - \n1.6 - Step 6: Test the login function with different devices (e.g. desktop, laptop, mobile) - The login function should work as expected on all devices - \n1.7 - Step 7: Test the login function with different network connections (e.g. Wi-Fi, Ethernet, 4G) - The login function should work as expected on all network connections - \n1.8 - Step 8: Measure the memory usage of the login page - The memory usage should be within the expected limits - \n1.9 - Step 9: Measure the CPU usage of the login page - The CPU usage should be within the expected limits - \n1.10 - Step 10: Test the login function for 24 hours continuously - The login function should work as expected without any issues - \n1.11 - Step 11: Test the login function with a large number of concurrent users - The login function should work as expected without any issues - \n1.12 - Step 12: Test the login function with different screen resolutions - The login function should work as expected on all screen resolutions - \n1.13 - Step 13: Test the login function with different operating systems (e.g. Windows, macOS, Linux) - The login function should work as expected on all operating systems - \n1.14 - Step 14: Measure the response time of the login page - The response time should be less than 2 seconds - \n1.15 - Step 15: Test the login function with a slow network connection - The login function should work as expected even with a slow network connection - \n\nThere are **15** testcases in total for the Salesforce login function."
+            },
+            "logprobs": null,
+            "finish_reason": "stop"
+        }
+    ],
+    "usage": {
+        "queue_time": 0.202068754,
+        "prompt_tokens": 92,
+        "prompt_time": 0.004505406,
+        "completion_tokens": 508,
+        "completion_time": 1.088186192,
+        "total_tokens": 600,
+        "total_time": 1.092691598
+    },
+    "usage_breakdown": null,
+    "system_fingerprint": "fp_9e1e8f8435",
+    "x_groq": {
+        "id": "req_01k7ttcb7kfh2vwpeqff7z4x0f"
+    },
+    "service_tier": "on_demand"
+}

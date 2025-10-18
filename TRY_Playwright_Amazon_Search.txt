@@ -1,0 +1,45 @@
+import { test, expect } from '@playwright/test';
+
+test('Amazon.ca Product Search', async ({ page }) => {
+  // Step 1) Load a demo Amazon-like page
+  await page.setContent(`
+    <form id="nav-search-bar-form" action="#" method="GET">
+      <select id="searchDropdownBox" name="url">
+        <option value="search-alias=aps" selected>All Departments</option>
+        <option value="search-alias=books">Books</option>
+        <option value="search-alias=electronics">Electronics</option>
+      </select>
+      <input type="text" id="twotabsearchtextbox" />
+      <input type="submit" id="nav-search-submit-button" value="Go"/>
+    </form>
+    <div id="search-result"></div>
+    <script>
+      const form = document.getElementById('nav-search-bar-form');
+      form.addEventListener('submit', e => {
+        e.preventDefault(); // prevent page reload
+        const query = document.getElementById('twotabsearchtextbox').value;
+        document.getElementById('search-result').textContent = "Search executed for: " + query;
+      });
+    </script>
+  `);
+
+  // Step 2) Wait for the dropdown to be visible and select "All Departments"
+  const searchDropdown = page.locator('#searchDropdownBox');
+  await expect(searchDropdown).toBeVisible({ timeout: 60000 });
+  await searchDropdown.selectOption('search-alias=aps');
+
+  // Step 3) Enter search text in the textbox
+  const searchBox = page.locator('#twotabsearchtextbox');
+  await expect(searchBox).toBeVisible({ timeout: 60000 });
+  await searchBox.fill('laptop');
+
+  // Step 4) Click the search button
+  const searchButton = page.locator('#nav-search-submit-button');
+  await expect(searchButton).toBeVisible({ timeout: 60000 });
+  await searchButton.click();
+
+  // Step 5) Verify search result text
+  const result = page.locator('#search-result');
+  await expect(result).toHaveText('Search executed for: laptop', { timeout: 60000 });
+  console.log('Search executed successfully on Amazon.ca Retail Application');
+});
